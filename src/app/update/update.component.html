@@ -1,0 +1,132 @@
+<mat-toolbar color="primary" style="position: relative">
+  <mat-toolbar-row fxLayout="row" fxLayoutAlign="start center">
+    <span style="margin-left: 33%">Update</span>
+    <button
+      mat-icon-button
+      mat-dialog-close
+      style="position: absolute; right: 0; top: 0"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="updateForm" (ngSubmit)="handleUpdate()">
+    <div fxFlex fxLayout="column" fxLayoutGap="16px">
+      <!-- Name Field -->
+      <mat-form-field appearance="outline" style="margin-right: 10px">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" required autocomplete="off" />
+        <mat-error
+          *ngIf="
+            updateForm.controls['name'].invalid &&
+            updateForm.controls['name'].touched
+          "
+        >
+          <span *ngIf="updateForm.controls['name'].errors?.['required']">
+            This field is mandatory
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Email Field -->
+      <mat-form-field appearance="outline" style="margin-right: 10px">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required autocomplete="off" />
+        <mat-error
+          *ngIf="
+            updateForm.controls['email'].invalid &&
+            updateForm.controls['email'].touched
+          "
+        >
+          <span *ngIf="updateForm.controls['email'].errors?.['required']">
+            This field is mandatory
+          </span>
+          <span *ngIf="updateForm.controls['email'].errors?.['email']">
+            This field is invalid
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Contact Number Field -->
+      <mat-form-field appearance="outline" style="margin-right: 10px">
+        <mat-label>Contact Number</mat-label>
+        <input
+          matInput
+          formControlName="contactNumber"
+          required
+          autocomplete="off"
+        />
+        <mat-error
+          *ngIf="
+            updateForm.controls['contactNumber'].touched &&
+            updateForm.controls['contactNumber'].invalid
+          "
+        >
+          <span
+            *ngIf="updateForm.controls['contactNumber'].errors?.['required']"
+            >This field is mandatory</span
+          >
+          <span *ngIf="updateForm.controls['contactNumber'].errors?.['pattern']"
+            >This field is invalid</span
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Status Field -->
+      <mat-form-field appearance="outline" style="margin-right: 10px">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status" required>
+          <mat-option value="true">Actif</mat-option>
+          <mat-option value="false">Inactif</mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+            updateForm.controls['status'].invalid &&
+            updateForm.controls['status'].touched
+          "
+        >
+          <span *ngIf="updateForm.controls['status'].errors?.['required']">
+            This field is mandatory
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Role Field -->
+      <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role" required>
+          <mat-option value="admin">Admin</mat-option>
+          <mat-option value="user">User</mat-option>
+          <mat-option value="editor">Editor</mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+            updateForm.controls['role'].invalid &&
+            updateForm.controls['role'].touched
+          "
+        >
+          <span *ngIf="updateForm.controls['role'].errors?.['required']">
+            This field is mandatory
+          </span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <mat-dialog-actions align="end">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="updateForm.invalid"
+        style="margin-right: 10px"
+      >
+        <mat-icon>save</mat-icon> Update
+      </button>
+      <button mat-raised-button color="warn" mat-dialog-close>
+        <mat-icon>cancel</mat-icon> Close
+      </button>
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>

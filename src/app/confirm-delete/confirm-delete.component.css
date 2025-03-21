@@ -1,0 +1,20 @@
+.delete-dialog {
+  text-align: center;
+  padding: 16px;
+}
+
+.dialog-icon {
+  vertical-align: middle;
+  margin-right: 8px;
+  font-size: 30px;
+}
+
+.dialog-content p {
+  margin: 16px 0;
+  font-size: 16px;
+  color: #6d6d6d;
+}
+
+.dialog-actions button {
+  margin: 0 8px;
+}

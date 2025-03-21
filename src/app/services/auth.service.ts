@@ -1,0 +1,52 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthService {
+  private baseUrl = 'http://localhost:8080/auth'; // URL backend
+
+  constructor(private http: HttpClient, private router: Router) {}
+
+  login(credentials: { email: string; password: string }): Observable<string> {
+    return this.http.post(`${this.baseUrl}/login`, credentials, {
+      responseType: 'text',
+    });
+  }
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
+  }
+
+  getStoredUserName(): string {
+    return localStorage.getItem('name') || '';
+  }
+  checkActivity() {
+    try {
+      const token = localStorage.getItem('token');
+      if (token) {
+        const jwt = JSON.parse(atob(token.split('.')[1]));
+        const expires = new Date(jwt.exp * 1000);
+        const timeout = expires.getTime() - Date.now();
+        if (timeout <= 0) {
+          this.logOut();
+        }
+      }
+    } catch (e) {
+      if (e instanceof Error) {
+        console.error('Erreur lors du traitement du token JWT :', e.message);
+      } else {
+        console.error('Erreur inconnue lors du traitement du token JWT :', e);
+      }
+      this.logOut();
+    }
+  }
+
+  logOut() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/home']);
+  }
+}

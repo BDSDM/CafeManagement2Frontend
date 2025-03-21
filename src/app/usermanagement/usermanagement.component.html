@@ -1,0 +1,109 @@
+<!-- HEADER -->
+<mat-toolbar class="header">
+  <span class="title">Cafe Management</span>
+  <span class="spacer"></span>
+  <button mat-button class="sign-button" (click)="logOut()">Log out</button>
+</mat-toolbar>
+
+<!-- LAYOUT PRINCIPAL : Sidebar + Contenu -->
+<mat-sidenav-container class="sidenav-container">
+  <!-- SIDEBAR (Dashboard) -->
+  <mat-sidenav mode="side" class="sidebar" opened>
+    <h3 class="sidebar-title">Bienvenue "{{ username }}" dans le Dashboard</h3>
+    <ul class="sidebar-list">
+      <li>
+        <button
+          mat-button
+          class="sidebar-button"
+          (click)="goToToDoList()"
+          style="margin-left: -17px"
+        >
+          My To Do List
+        </button>
+      </li>
+      <li>
+        <button
+          mat-button
+          class="sidebar-button"
+          (click)="goToUsersManagement()"
+        >
+          Gestion des utilisateurs
+        </button>
+      </li>
+    </ul>
+  </mat-sidenav>
+
+  <!-- CONTENU PRINCIPAL -->
+  <mat-sidenav-content class="content">
+    <hr />
+    <mat-card>
+      <mat-form-field appearance="fill">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input />
+      </mat-form-field>
+    </mat-card>
+    <hr />
+
+    <div class="user-table-container">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <!-- Colonne Name -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <!-- Colonne Actions (Supprimer) -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Delete</th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="deleteUser(element.id)"
+              aria-label="Supprimer utilisateur"
+            >
+              <mat-icon class="mat-warn">delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- Colonne Update -->
+        <ng-container matColumnDef="update">
+          <th mat-header-cell *matHeaderCellDef>Update</th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              mat-icon-button
+              color="primary"
+              (click)="handleUpdateAction(element)"
+              aria-label="Mettre à jour utilisateur"
+            >
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-slide-toggle
+              [checked]="element.status === 'true'"
+              (change)="toggleStatus(element)"
+            >
+              {{ element.status === "true" ? "Actif" : "Inactif" }}
+            </mat-slide-toggle>
+          </td>
+        </ng-container>
+
+        <!-- En-tête de la table -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <!-- Corps de la table -->
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- FOOTER -->
+<mat-toolbar class="footer">
+  <span>&copy; 2024 Cafe Management - Tous droits réservés</span>
+</mat-toolbar>

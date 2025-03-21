@@ -1,0 +1,18 @@
+<div class="delete-dialog">
+  <h2 mat-dialog-title>
+    <mat-icon color="warn" class="dialog-icon">warning</mat-icon>
+    Confirmer la suppression
+  </h2>
+  <mat-dialog-content class="dialog-content">
+    <p>
+      Êtes-vous sûr de vouloir supprimer cet utilisateur ? Cette action est
+      irréversible.
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end" class="dialog-actions">
+    <button mat-stroked-button (click)="onCancel()" style="margin-right: 10px">
+      Non
+    </button>
+    <button mat-raised-button color="warn" (click)="onConfirm()">Oui</button>
+  </mat-dialog-actions>
+</div>

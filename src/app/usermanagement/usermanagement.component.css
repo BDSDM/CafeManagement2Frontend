@@ -1,0 +1,118 @@
+/* HEADER */
+.header {
+  background-color: orange !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 64px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+/* Titre "Cafe Management" */
+.title {
+  font-size: 48px; /* Deux fois plus grand */
+  font-weight: bold;
+  color: blue;
+}
+
+/* LAYOUT PRINCIPAL */
+.sidenav-container {
+  display: flex;
+  margin-top: 64px; /* Pour que le contenu ne soit pas caché sous le header */
+  height: calc(100vh - 64px); /* On retire la hauteur du header */
+  flex-direction: row;
+}
+
+/* SIDEBAR (DASHBOARD) */
+.sidebar {
+  width: 250px;
+  background-color: #263238; /* Bleu foncé */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  height: 100%; /* Assure que la sidebar prend toute la hauteur */
+  box-sizing: border-box; /* Pour éviter que les padding ne changent la hauteur de la sidebar */
+  overflow-y: auto; /* Permet le défilement dans le sidebar si le contenu est trop long */
+}
+
+.sidebar-title {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Boutons de la sidebar */
+.sidebar-button {
+  width: 100%;
+  color: white !important;
+  text-align: left;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.sidebar-button:hover {
+  background-color: #37474f; /* Bleu plus clair */
+}
+
+/* CONTENU PRINCIPAL */
+.content {
+  flex: 1; /* Cela permet à .content d'occuper l'espace restant */
+  padding: 20px;
+  background-color: #f5f5f5;
+  min-height: 0; /* Assure-toi que .content n'a pas de hauteur minimale */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch; /* S'assure que la table occupe tout l'espace */
+  overflow-y: auto; /* Permet de faire défiler le contenu si nécessaire */
+}
+
+/* Table container */
+.user-table-container {
+  flex: 1; /* La table occupe toute la hauteur disponible dans .content */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: auto; /* Assure-toi que la table est scrollable si elle dépasse */
+}
+
+/* Tables mat-elevation */
+table.mat-elevation-z8 {
+  width: 100%;
+  overflow: auto;
+}
+
+/* FOOTER */
+.footer {
+  background-color: green !important;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  height: 64px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Spacer utilisé pour aligner les boutons dans le header */
+.spacer {
+  flex: 1;
+}
+
+/* Boutons Sign in / Sign up */
+.sign-button {
+  font-size: 18px;
+  font-weight: bold;
+}

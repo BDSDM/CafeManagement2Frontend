@@ -1,0 +1,87 @@
+<mat-toolbar color="primary" style="position: relative">
+  <mat-toolbar-row fxLayout="row" fxLayoutAlign="start center">
+    <span style="margin-left: 33%">Sign in</span>
+    <button
+      mat-icon-button
+      mat-dialog-close
+      style="position: absolute; right: 0; top: 0"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-dialog-content class="mat-typography">
+  <form [formGroup]="signInForm">
+    <div fxFlex fxLayout="column" fxLayoutGap="16px">
+      <!-- Email Field -->
+      <mat-form-field appearance="outline" style="margin-right: 10px">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" required autocomplete="off" />
+        <mat-error
+          *ngIf="
+            signInForm.controls.email.touched &&
+            signInForm.controls.email.invalid
+          "
+        >
+          <span *ngIf="signInForm.controls.email.errors?.required"
+            >This field is mandatory</span
+          >
+          <span *ngIf="signInForm.controls.email.errors?.email"
+            >This field is invalid</span
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Password Field -->
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          [type]="passwordVisible ? 'text' : 'password'"
+          formControlName="password"
+          required
+          autocomplete="new-password"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="togglePasswordVisibility()"
+        >
+          <mat-icon>{{
+            passwordVisible ? "visibility" : "visibility_off"
+          }}</mat-icon>
+        </button>
+        <mat-error
+          *ngIf="
+            signInForm.controls.password.touched &&
+            signInForm.controls.password.invalid
+          "
+        >
+          <span *ngIf="signInForm.controls.password.errors?.required"
+            >This field is mandatory</span
+          >
+        </mat-error>
+      </mat-form-field>
+      <div *ngIf="loginError">
+        <mat-error>Identifiant ou mot de passe incorrect.</mat-error>
+      </div>
+    </div>
+    <mat-dialog-actions align="end">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        (click)="handleSubmit()"
+        [disabled]="!(signInForm.valid && signInForm.dirty)"
+        style="margin-right: 10px"
+      >
+        <mat-icon>login</mat-icon> Sign in
+      </button>
+      <button mat-raised-button color="warn" mat-dialog-close>
+        <mat-icon>cancel</mat-icon> Close
+      </button>
+    </mat-dialog-actions>
+  </form>
+</mat-dialog-content>

@@ -1,0 +1,109 @@
+/* HEADER */
+.header {
+  background-color: orange !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 64px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+/* Titre "Cafe Management" */
+.title {
+  font-size: 48px; /* Deux fois plus grand */
+  font-weight: bold;
+  color: blue;
+}
+
+/* Espacement pour aligner les boutons à droite */
+.spacer {
+  flex: 1;
+}
+
+/* Boutons Sign in / Sign up */
+.sign-button {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* LAYOUT PRINCIPAL */
+.main-layout {
+  display: flex;
+  margin-top: 64px; /* Pour ne pas être caché sous le header */
+  height: calc(
+    100vh - 64px
+  ); /* Ajuste la hauteur pour ne pas cacher le footer */
+}
+
+/* SIDEBAR (DASHBOARD) */
+.sidenav-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #263238; /* Bleu foncé */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.sidebar-title {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Boutons de la sidebar */
+.sidebar-button {
+  width: 100%;
+  color: white !important;
+  text-align: left;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.sidebar-button:hover {
+  background-color: #37474f; /* Bleu plus clair */
+}
+
+/* CONTENU PRINCIPAL */
+.content {
+  flex: 1;
+  text-align: center;
+  padding: 100px 20px;
+  background-color: #f5f5f5;
+  min-height: calc(
+    100vh - 128px
+  ); /* Ajuste la hauteur en fonction du header et du footer */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* FOOTER */
+.footer {
+  background-color: green !important;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  height: 64px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,22 @@
+.mat-toolbar {
+  margin: 0; /* Retirer la marge négative */
+  padding: 0;
+  box-sizing: border-box;
+}
+
+mat-form-field {
+  padding: 5px;
+}
+
+mat-hint {
+  color: red;
+}
+
+mat-dialog-content {
+  max-height: calc(
+    100vh - 64px
+  ); /* Hauteur maximale, moins la hauteur du toolbar */
+  overflow-y: auto; /* Permet de scroller si nécessaire uniquement */
+  box-sizing: border-box;
+  padding: 0 24px; /* Ajuster le padding pour éviter un débordement */
+}
