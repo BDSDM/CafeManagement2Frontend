@@ -26,7 +26,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { MatSelectModule } from '@angular/material/select';
-
+import { TodoListComponent } from './todo-list/todo-list.component';
+import { MatListModule } from '@angular/material/list';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,7 @@ import { MatSelectModule } from '@angular/material/select';
     UsermanagementComponent,
     UpdateComponent,
     ConfirmDeleteComponent,
+    TodoListComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +59,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatSlideToggleModule,
     MatSnackBarModule,
     MatSelectModule,
+    MatListModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

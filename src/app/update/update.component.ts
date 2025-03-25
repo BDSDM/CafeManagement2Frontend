@@ -23,10 +23,6 @@ export class UpdateComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data && this.data.user) {
-      console.log(this.data.user.email + 'email');
-
-      console.log(this.data.user.status + 'status');
-
       this.updateForm = this.fb.group({
         name: [this.data.user.name, Validators.required],
         email: [this.data.user.email, [Validators.required, Validators.email]],

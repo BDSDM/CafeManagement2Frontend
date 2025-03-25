@@ -1,0 +1,105 @@
+<!-- HEADER -->
+<mat-toolbar class="header">
+  <span class="title">Cafe Management</span>
+  <span class="spacer"></span>
+
+  <button mat-button class="sign-button" (click)="logout()">Logout</button>
+</mat-toolbar>
+
+<!-- SIDEBAR -->
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav class="sidenav" mode="side" opened>
+    <h3 class="sidebar-title">Bienvenu "{{ userName }}" dans To Do List !</h3>
+    <ul class="sidebar-list">
+      <li>
+        <button
+          mat-button
+          class="sidebar-button"
+          (click)="goToDashboard()"
+          style="margin-left: -42px"
+        >
+          Dashboard
+        </button>
+      </li>
+      <li>
+        <button
+          mat-button
+          class="sidebar-button"
+          (click)="goToUsersManagement()"
+        >
+          Gestion des utilisateurs
+        </button>
+      </li>
+      <li>
+        <button
+          mat-button
+          class="sidebar-button"
+          (click)="goToCookiesGame()"
+          style="margin-left: -31px"
+        >
+          Cookies Game
+        </button>
+      </li>
+    </ul>
+  </mat-sidenav>
+
+  <!-- CONTENT -->
+  <div class="content">
+    <h1>Bienvenue dans notre Café</h1>
+    <p>Dégustez les meilleurs cafés dans un cadre chaleureux et convivial.</p>
+
+    <!-- TODO CONTAINER -->
+    <div class="todo-container mat-elevation-z4">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title class="mat-headline">Liste des tâches</mat-card-title>
+          <mat-card-subtitle>Utilisateur: {{ userName }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="new-task-container">
+            <mat-form-field appearance="outline" class="input-field">
+              <mat-label>Ajouter une nouvelle tâche</mat-label>
+              <input
+                matInput
+                [(ngModel)]="newTodoTitle"
+                placeholder="Titre de la tâche"
+              />
+            </mat-form-field>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="addTodo()"
+              [disabled]="!newTodoTitle.trim()"
+            >
+              <mat-icon>add</mat-icon> Ajouter
+            </button>
+          </div>
+
+          <mat-list *ngIf="todos.length > 0">
+            <mat-list-item *ngFor="let todo of todos">
+              <mat-checkbox [(ngModel)]="todo.completed">
+                {{ todo.title }}
+              </mat-checkbox>
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteTodo(todo.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </mat-list-item>
+          </mat-list>
+
+          <div *ngIf="todos.length === 0" class="no-tasks">
+            Aucune tâche à afficher.
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</mat-sidenav-container>
+
+<!-- FOOTER -->
+<mat-toolbar class="footer">
+  <span>&copy; 2024 Cafe Management - Tous droits réservés</span>
+</mat-toolbar>

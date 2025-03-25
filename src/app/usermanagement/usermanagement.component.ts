@@ -15,6 +15,7 @@ import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.compone
 })
 export class UsermanagementComponent {
   username: string = '';
+  showPopup = false;
   dataSource: MatTableDataSource<User> = new MatTableDataSource<User>();
   displayedColumns: string[] = ['name', 'actions', 'update', 'status'];
 
@@ -120,7 +121,15 @@ export class UsermanagementComponent {
     this.router.navigate(['/usermanagement']);
   }
 
-  goToToDoList() {}
+  goToToDoList() {
+    this.router.navigate(['/todolist']);
+  }
+  goToDashboard() {
+    this.showPopup = false; // Ferme la popup
+    localStorage.setItem('showPopup', JSON.stringify(this.showPopup));
+    this.router.navigate(['/dashboard']);
+  }
+  goToCookiesGame() {}
   logOut() {
     this.authService.logOut();
   }

@@ -20,9 +20,22 @@ export class AuthService {
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
   }
+  getStoredUserId(): number {
+    const userId = localStorage.getItem('id');
+    return userId ? +userId : 0; // Si l'ID est trouvé, on le convertit en nombre, sinon on retourne 0
+  }
+  getStoredUserEmail(): string | null {
+    return localStorage.getItem('sub');
+  }
+  getStoredBoolean(): boolean {
+    return JSON.parse(localStorage.getItem('showPopup') || 'false');
+  }
 
   getStoredUserName(): string {
     return localStorage.getItem('name') || '';
+  }
+  getStoredUserRole(): string {
+    return localStorage.getItem('role') || '';
   }
   checkActivity() {
     try {
