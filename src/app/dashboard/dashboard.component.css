@@ -107,3 +107,91 @@
   align-items: center;
   justify-content: center;
 }
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1000; /* Assurez-vous que la modal est bien au-dessus */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+  opacity: 0;
+  animation: fadeIn 0.3s forwards; /* Animation d'apparition */
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  transform: translateY(-50px);
+  animation: slideUp 0.3s forwards; /* Animation d'apparition avec glissement */
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.modal-message {
+  font-size: 16px;
+  margin-bottom: 30px;
+  color: #555;
+}
+
+.modal-button {
+  background-color: #6200ea;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-button:hover {
+  background-color: #3700b3;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 24px;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close:hover {
+  color: #333;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(-50px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

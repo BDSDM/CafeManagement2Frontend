@@ -2,15 +2,27 @@
 <mat-toolbar class="header">
   <span class="title">Cafe Management</span>
   <span class="spacer"></span>
-  <button mat-button class="sign-button" (click)="logOut()">Log out</button>
+  <button mat-button class="sign-button" (click)="logOut()">Logout</button>
 </mat-toolbar>
 
 <!-- LAYOUT PRINCIPAL : Sidebar + Contenu -->
 <mat-sidenav-container class="sidenav-container">
   <!-- SIDEBAR (Dashboard) -->
   <mat-sidenav mode="side" class="sidebar" opened>
-    <h3 class="sidebar-title">Bienvenue "{{ username }}" dans le Dashboard</h3>
+    <h3 class="sidebar-title">
+      Bienvenue "{{ username }}" dans UserManagement !
+    </h3>
     <ul class="sidebar-list">
+      <li>
+        <button
+          mat-button
+          class="sidebar-button"
+          (click)="goToDashboard()"
+          style="margin-left: -30px"
+        >
+          Dashboard
+        </button>
+      </li>
       <li>
         <button
           mat-button
@@ -21,13 +33,15 @@
           My To Do List
         </button>
       </li>
+
       <li>
         <button
           mat-button
           class="sidebar-button"
-          (click)="goToUsersManagement()"
+          (click)="goToCookiesGame()"
+          style="margin-left: -17px"
         >
-          Gestion des utilisateurs
+          Cookies Game
         </button>
       </li>
     </ul>

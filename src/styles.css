@@ -1,4 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+.sidenav mat-list-item,
+.sidenav mat-list-item span,
+.sidenav button {
+  color: white !important;
+}
+
+.sidenav mat-list-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}

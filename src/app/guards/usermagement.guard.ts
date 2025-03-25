@@ -6,13 +6,21 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root',
 })
 export class UsermanagementGuard implements CanActivate {
+  userRole: string = '';
+  showPopup = false;
+  storeShowpup = false;
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(): boolean {
-    if (this.authService.isAuthenticated()) {
+    this.userRole = this.authService.getStoredUserRole() || '';
+
+    if (this.authService.isAuthenticated() && this.userRole === 'admin') {
       return true;
     }
-    this.router.navigate(['/login']);
+    this.showPopup = true;
+    localStorage.setItem('showPopup', JSON.stringify(this.showPopup));
+
+    this.router.navigate(['/dashboard']);
     return false;
   }
 }
