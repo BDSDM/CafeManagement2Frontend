@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmLogoutDialogComponent } from '../confirm-logout-dialog/confirm-logout-dialog.component';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +11,11 @@ import { Router } from '@angular/router';
 export class AuthService {
   private baseUrl = 'http://localhost:8080/auth'; // URL backend
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private dialog: MatDialog
+  ) {}
 
   login(credentials: { email: string; password: string }): Observable<string> {
     return this.http.post(`${this.baseUrl}/login`, credentials, {
@@ -59,7 +65,17 @@ export class AuthService {
   }
 
   logOut() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/home']);
+    const dialogRef = this.dialog.open(ConfirmLogoutDialogComponent, {
+      width: '400px',
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // Si l'utilisateur confirme la déconnexion
+        localStorage.removeItem('token');
+        this.router.navigate(['/home']);
+      }
+    });
   }
 }

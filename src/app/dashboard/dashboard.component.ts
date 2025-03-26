@@ -30,7 +30,9 @@ export class DashboardComponent {
   goToToDoList() {
     this.router.navigate(['/todolist']);
   }
-  goToCookiesGame() {}
+  goToCookiesGame() {
+    this.router.navigate(['/cookiesgame']);
+  }
   logOut() {
     this.authService.logOut();
   }
