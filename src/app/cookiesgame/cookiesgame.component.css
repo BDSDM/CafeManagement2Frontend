@@ -1,0 +1,167 @@
+/* HEADER */
+.header {
+  background-color: orange !important;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 64px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+/* Titre "Cafe Management" */
+.title {
+  font-size: 48px;
+  font-weight: bold;
+  color: blue;
+}
+
+/* Espace pour aligner les boutons */
+.spacer {
+  flex: 1;
+}
+
+/* Boutons Sign in / Sign up */
+.sign-button {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* LAYOUT GENERAL */
+.sidenav-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  margin-top: 64px; /* Décalage pour ne pas chevaucher le header */
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 250px;
+  background-color: #263238;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  flex-shrink: 0; /* Empêche la réduction de la sidebar */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 0px 0; /* Réduire l'espacement entre les éléments de la liste */
+  text-align: left; /* Alignement du texte à gauche pour plus de clarté */
+  display: flex;
+  align-items: center; /* Aligne verticalement la puce et le texte */
+}
+
+.sidebar li::before {
+  content: "\2022"; /* Unicode pour la puce (point) */
+  font-size: 24px; /* Agrandir la puce */
+  color: white; /* Couleur de la puce */
+  margin-right: 10px; /* Espacement entre la puce et le texte */
+  display: inline-block;
+  width: 20px;
+}
+
+.sidebar button {
+  color: white !important;
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px;
+  width: 100%;
+  text-align: left; /* Alignement du texte à gauche pour plus de clarté */
+  border: none;
+  background: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.sidebar button:hover {
+  background-color: #555;
+}
+.sidebar-title {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* CONTENU PRINCIPAL */
+.content {
+  flex: 1; /* Permet au contenu de s'étendre jusqu'à la bordure droite */
+  text-align: center;
+  padding: 100px 300px;
+  background-color: #f5f5f5;
+  min-height: calc(
+    100vh - 128px
+  ); /* Ajuste la hauteur sans empiéter sur le header/footer */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* FOOTER */
+.footer {
+  background-color: green !important;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  height: 64px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CONTAINER COULEUR */
+.color-container {
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  max-width: 300px;
+  text-align: center;
+}
+
+.color-container p {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.color-container button {
+  width: 45px;
+  height: 45px;
+  margin: 5px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.color-container button:hover {
+  transform: scale(1.1);
+}
+
+.color-container button:focus {
+  outline: none;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+}
+
+.color-container button:active {
+  transform: scale(0.95);
+}

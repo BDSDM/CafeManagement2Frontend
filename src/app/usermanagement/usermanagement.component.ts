@@ -129,7 +129,9 @@ export class UsermanagementComponent {
     localStorage.setItem('showPopup', JSON.stringify(this.showPopup));
     this.router.navigate(['/dashboard']);
   }
-  goToCookiesGame() {}
+  goToCookiesGame() {
+    this.router.navigate(['/cookiesgame']);
+  }
   logOut() {
     this.authService.logOut();
   }

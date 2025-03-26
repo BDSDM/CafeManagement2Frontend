@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface User {
@@ -17,6 +17,7 @@ export interface User {
 })
 export class UserService {
   private apiUrl = 'http://localhost:8080/users'; // Remplace avec ton URL backend
+  private apiUrlCookie = 'http://localhost:8080/users/api';
 
   constructor(private http: HttpClient) {}
 
@@ -53,5 +54,44 @@ export class UserService {
   // Supprimer un utilisateur
   deleteUser(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+  setColorPreference(color: string): Observable<any> {
+    // Vérification de la valeur de couleur
+    if (!color || color.trim() === '') {
+      throw new Error('La couleur ne peut pas être vide');
+    }
+
+    // Récupérer le token JWT depuis le localStorage
+    const token = localStorage.getItem('token'); // Ou utilisez une autre méthode pour obtenir le token
+    console.log('Token:', token);
+    console.log('Color:', color);
+
+    // Créer un paramètre de requête pour la couleur
+    const params = new HttpParams().set('color', color);
+
+    // Ajouter le token JWT dans l'en-tête Authorization
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    // Envoyer la requête POST avec le token et les cookies
+    return this.http.post(`${this.apiUrlCookie}/set-color`, null, {
+      params,
+      headers, // Inclure l'en-tête avec le token
+      responseType: 'text', // Spécifier le type de réponse attendu
+      withCredentials: true, // Inclure les cookies dans la requête
+    });
+  }
+  getColorPreference(): Observable<string> {
+    // Récupérer le token JWT depuis le localStorage
+    const token = localStorage.getItem('token'); // Ou utilisez une autre méthode pour obtenir le token
+
+    // Ajouter le token JWT dans l'en-tête Authorization
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    // Envoyer la requête GET avec le token et les cookies
+    return this.http.get(`${this.apiUrlCookie}/get-color`, {
+      headers, // Inclure l'en-tête avec le token
+      responseType: 'text', // Spécifier le type de réponse attendu
+      withCredentials: true, // Inclure les cookies dans la requête
+    });
   }
 }

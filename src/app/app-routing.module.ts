@@ -7,8 +7,15 @@ import { UsermanagementComponent } from './usermanagement/usermanagement.compone
 import { UsermanagementGuard } from './guards/usermagement.guard';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodolistGuard } from './guards/todolist.guard';
+import { CookiesgameComponent } from './cookiesgame/cookiesgame.component';
+import { CookiesgameGuard } from './guards/cookiesgame.guard';
 
 const routes: Routes = [
+  {
+    path: 'cookiesgame',
+    component: CookiesgameComponent,
+    canActivate: [CookiesgameGuard],
+  },
   {
     path: 'dashboard',
     component: DashboardComponent,

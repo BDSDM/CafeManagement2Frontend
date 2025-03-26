@@ -1,0 +1,66 @@
+<!-- HEADER -->
+<mat-toolbar class="header">
+  <span class="title">Cafe Management</span>
+  <span class="spacer"></span>
+  <button mat-button class="sign-button" (click)="logout()">Logout</button>
+</mat-toolbar>
+
+<!-- SIDEBAR & CONTENT -->
+<mat-sidenav-container class="sidenav-container">
+  <!-- SIDEBAR -->
+  <mat-sidenav mode="side" class="sidebar" opened>
+    <h3 class="sidebar-title">Bienvenu "{{ userName }}" dans Cookies game !</h3>
+    <ul class="sidebar-list">
+      <li>
+        <button
+          mat-button
+          class="sidebar-button"
+          (click)="goToDashboard()"
+          style="color: white"
+        >
+          Dashboard
+        </button>
+      </li>
+      <li>
+        <button
+          mat-button
+          class="sidebar-button"
+          (click)="goToToDoList()"
+          style="color: white"
+        >
+          My To Do List
+        </button>
+      </li>
+      <li>
+        <button
+          mat-button
+          class="sidebar-button"
+          (click)="goToUsersManagement()"
+        >
+          Gestion des utilisateurs
+        </button>
+      </li>
+    </ul>
+  </mat-sidenav>
+
+  <!-- CONTENU PRINCIPAL -->
+  <div class="content" [style.background-color]="currentColor">
+    <h1>Bienvenue dans notre Café</h1>
+    <p>Dégustez les meilleurs cafés dans un cadre chaleureux et convivial.</p>
+
+    <!-- Sélecteur de couleur -->
+    <div [style.background-color]="currentColor" class="color-container">
+      <p>Choisissez une couleur de fond :</p>
+      <button
+        *ngFor="let color of colors"
+        [style.background-color]="color"
+        (click)="setColor(color)"
+      ></button>
+    </div>
+  </div>
+</mat-sidenav-container>
+
+<!-- FOOTER -->
+<mat-toolbar class="footer">
+  <span>&copy; 2024 Cafe Management - Tous droits réservés</span>
+</mat-toolbar>

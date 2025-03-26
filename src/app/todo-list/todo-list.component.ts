@@ -99,5 +99,7 @@ export class TodoListComponent implements OnInit {
   goToToDoList() {
     this.router.navigate(['/todolist']);
   }
-  goToCookiesGame() {}
+  goToCookiesGame() {
+    this.router.navigate(['/cookiesgame']);
+  }
 }

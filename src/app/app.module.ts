@@ -28,6 +28,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { MatSelectModule } from '@angular/material/select';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { MatListModule } from '@angular/material/list';
+import { CookiesgameComponent } from './cookiesgame/cookiesgame.component';
+import { ConfirmLogoutDialogComponent } from './confirm-logout-dialog/confirm-logout-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +41,8 @@ import { MatListModule } from '@angular/material/list';
     UpdateComponent,
     ConfirmDeleteComponent,
     TodoListComponent,
+    CookiesgameComponent,
+    ConfirmLogoutDialogComponent,
   ],
   imports: [
     BrowserModule,
