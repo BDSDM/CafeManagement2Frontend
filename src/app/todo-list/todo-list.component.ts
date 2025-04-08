@@ -70,9 +70,16 @@ export class TodoListComponent implements OnInit {
 
   // Supprimer une tâche
   deleteTodo(taskId: number): void {
-    this.todoService.deleteTodo(taskId).subscribe(() => {
-      this.todos = this.todos.filter((todo) => todo.id !== taskId);
-      this.showNotification('Tâche supprimée', 'success');
+    this.todoService.deleteTodo(taskId).subscribe({
+      next: () => {
+        this.todos = this.todos.filter((todo) => todo.id !== taskId);
+        this.showNotification('Tâche supprimée', 'success');
+      },
+      error: (err) => {
+        // Gestion de l'erreur, par exemple en affichant un message d'erreur
+        console.error('Erreur lors de la suppression de la tâche', err);
+        this.showNotification('Impossible de supprimer la tâche', 'error');
+      },
     });
   }
 

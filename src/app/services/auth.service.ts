@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmLogoutDialogComponent } from '../confirm-logout-dialog/confirm-logout-dialog.component';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,13 +15,17 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private userService: UserService
   ) {}
 
   login(credentials: { email: string; password: string }): Observable<string> {
     return this.http.post(`${this.baseUrl}/login`, credentials, {
       responseType: 'text',
     });
+  }
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
 
   isAuthenticated(): boolean {
@@ -51,7 +56,7 @@ export class AuthService {
         const expires = new Date(jwt.exp * 1000);
         const timeout = expires.getTime() - Date.now();
         if (timeout <= 0) {
-          this.logOut();
+          this.userService.logoutFromApp();
         }
       }
     } catch (e) {
@@ -60,7 +65,7 @@ export class AuthService {
       } else {
         console.error('Erreur inconnue lors du traitement du token JWT :', e);
       }
-      this.logOut();
+      this.userService.logoutFromApp();
     }
   }
 

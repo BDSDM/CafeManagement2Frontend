@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from './services/auth.service';
+import { ActivityService } from './services/activity.service';
+import { CheckActivityService } from './services/check-activity.service';
 
 @Component({
   selector: 'app-root',
@@ -8,10 +9,13 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'cafeManagement2Frontend';
-  showPopup: boolean = false;
 
-  constructor(private authService: AuthService) {}
-  ngOnInit(): void {
-    this.authService.checkActivity();
+  constructor(
+    private activityService: ActivityService,
+    private checkActivityService: CheckActivityService //private activityService: ActivityService // Injection du service de détection d'inactivité
+  ) {}
+
+  ngOnInit() {
+    this.checkActivityService.startChecking();
   }
 }
