@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 export interface User {
   id?: number;
@@ -18,8 +19,9 @@ export interface User {
 export class UserService {
   private apiUrl = 'http://localhost:8080/users'; // Remplace avec ton URL backend
   private apiUrlCookie = 'http://localhost:8080/users/api';
+  private deleteColorUrl = 'http://localhost:8080/users/api/delete-color'; // Utilise le bon port pour le backend
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   updateUserStatus(email: string, status: string): Observable<string> {
     return this.http.put<string>(
@@ -63,8 +65,6 @@ export class UserService {
 
     // Récupérer le token JWT depuis le localStorage
     const token = localStorage.getItem('token'); // Ou utilisez une autre méthode pour obtenir le token
-    console.log('Token:', token);
-    console.log('Color:', color);
 
     // Créer un paramètre de requête pour la couleur
     const params = new HttpParams().set('color', color);
@@ -93,5 +93,21 @@ export class UserService {
       responseType: 'text', // Spécifier le type de réponse attendu
       withCredentials: true, // Inclure les cookies dans la requête
     });
+  }
+  // Méthode pour supprimer le cookie
+  deletePreferredColor(): Observable<string> {
+    return this.http.post(
+      this.deleteColorUrl,
+      {},
+      {
+        withCredentials: true,
+        responseType: 'text', // 👈 Indique qu'on attend une chaîne de caractères et non du JSON
+      }
+    );
+  }
+  logoutFromApp() {
+    localStorage.removeItem('token');
+
+    this.router.navigate(['/home']);
   }
 }

@@ -30,6 +30,10 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { MatListModule } from '@angular/material/list';
 import { CookiesgameComponent } from './cookiesgame/cookiesgame.component';
 import { ConfirmLogoutDialogComponent } from './confirm-logout-dialog/confirm-logout-dialog.component';
+import { RouterModule } from '@angular/router';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CookieService } from 'ngx-cookie-service';
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,9 +68,13 @@ import { ConfirmLogoutDialogComponent } from './confirm-logout-dialog/confirm-lo
     MatSnackBarModule,
     MatSelectModule,
     MatListModule,
+    MatCheckboxModule,
+    MatPaginatorModule,
+    RouterModule.forRoot([]),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    CookieService,
   ],
   bootstrap: [AppComponent],
 })

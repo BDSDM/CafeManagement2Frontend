@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { User, UserData } from '../user.model';
+import { User, UserData } from '../models/user.model';
 import { UserService } from '../services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GlobalConstants } from '../global-constants';
@@ -54,14 +54,23 @@ export class UpdateComponent implements OnInit {
           this.dialogRef.close(response);
           this.snackBar.open('Utilisateur mis à jour avec succès', 'Fermer', {
             duration: 5000,
-            verticalPosition: 'top', // ou 'bottom'
-            horizontalPosition: 'center', // ou 'right', 'left'
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
           });
         },
         (error) => {
           console.error(
             "Erreur lors de la mise à jour de l'utilisateur :",
             error
+          );
+          this.snackBar.open(
+            "Échec de la mise à jour de l'utilisateur",
+            'Fermer',
+            {
+              duration: 5000,
+              verticalPosition: 'top',
+              horizontalPosition: 'center',
+            }
           );
         }
       );

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { AuthService } from '../services/auth.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-cookiesgame',
@@ -20,12 +21,26 @@ export class CookiesgameComponent {
   constructor(
     private router: Router,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit(): void {
     this.loadColorPreference();
     this.userName = this.authService.getStoredUserName();
+  }
+  reload() {
+    this.userService.deletePreferredColor().subscribe(
+      (response) => {
+        console.log('Cookie supprimé avec succès', response);
+        this.loadColorPreference();
+
+        // Ajouter ici une action de confirmation, comme afficher un message utilisateur
+      },
+      (error) => {
+        console.error('Erreur lors de la suppression du cookie', error);
+      }
+    );
   }
   logout() {
     this.authService.logOut();

@@ -9,8 +9,10 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodolistGuard } from './guards/todolist.guard';
 import { CookiesgameComponent } from './cookiesgame/cookiesgame.component';
 import { CookiesgameGuard } from './guards/cookiesgame.guard';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
+  { path: '', component: AppComponent },
   {
     path: 'cookiesgame',
     component: CookiesgameComponent,
