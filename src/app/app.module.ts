@@ -34,6 +34,9 @@ import { RouterModule } from '@angular/router';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CookieService } from 'ngx-cookie-service';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ConfirmResetPasswordComponent } from './confirm-reset-password/confirm-reset-password.component';
+import { RequestResetPasswordComponent } from './request-reset-password/request-reset-password.component';
+import { RefreshTokenPopupComponent } from './refresh-token-popup/refresh-token-popup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +50,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     TodoListComponent,
     CookiesgameComponent,
     ConfirmLogoutDialogComponent,
+    ConfirmResetPasswordComponent,
+    RequestResetPasswordComponent,
+    RefreshTokenPopupComponent,
   ],
   imports: [
     BrowserModule,

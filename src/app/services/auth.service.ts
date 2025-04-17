@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmLogoutDialogComponent } from '../confirm-logout-dialog/confirm-logout-dialog.component';
 import { UserService } from './user.service';
+import { RefreshTokenPopupComponent } from '../refresh-token-popup/refresh-token-popup.component';
 
 @Injectable({
   providedIn: 'root',
@@ -55,7 +56,14 @@ export class AuthService {
         const jwt = JSON.parse(atob(token.split('.')[1]));
         const expires = new Date(jwt.exp * 1000);
         const timeout = expires.getTime() - Date.now();
+        if (timeout <= 20000) {
+          // Moins de 20 secondes avant expiration → on rafraîchit
+          console.log('On rafraiiiiiiiiiiiiiiiiiiiichit');
+
+          this.refreshToken();
+        }
         if (timeout <= 0) {
+          // Token expiré → déconnexion
           this.userService.logoutFromApp();
         }
       }
@@ -68,7 +76,34 @@ export class AuthService {
       this.userService.logoutFromApp();
     }
   }
+  refreshToken() {
+    const dialogRef = this.dialog.open(RefreshTokenPopupComponent, {
+      width: '400px',
+      disableClose: true,
+    });
 
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        // L'utilisateur a cliqué sur "Oui"
+        this.executeRefreshToken();
+      } else {
+        // L'utilisateur a cliqué sur "Non" → ne rien faire
+        console.log('Session non prolongée.');
+      }
+    });
+  }
+  private executeRefreshToken() {
+    this.userService.refreshAccessToken().subscribe({
+      next: (newToken) => {
+        localStorage.setItem('token', newToken);
+        console.log('Token mis à jour avec succès');
+      },
+      error: (err) => {
+        console.error('Erreur lors du rafraîchissement :', err);
+        this.userService.logoutFromApp();
+      },
+    });
+  }
   logOut() {
     const dialogRef = this.dialog.open(ConfirmLogoutDialogComponent, {
       width: '400px',
