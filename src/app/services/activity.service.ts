@@ -6,7 +6,7 @@ import { UserService } from './user.service';
 })
 export class ActivityService implements OnDestroy {
   private inactivityTimeout: any;
-  private readonly INACTIVITY_DURATION = 1 * 30 * 1000; // 1 minute
+  private readonly INACTIVITY_DURATION = 1 * 300 * 1000; // 1 minute
 
   constructor(private userService: UserService) {
     this.startActivityListener();

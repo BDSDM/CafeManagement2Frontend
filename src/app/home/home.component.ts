@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { SignupComponent } from '../signup/signup.component';
 import { SigninComponent } from '../signin/signin.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,8 +10,11 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private router: Router) {}
   ngOnInit(): void {}
+  changePassord() {
+    this.router.navigate(['/reset-password/request']);
+  }
 
   handleSignUpAction() {
     const dialogConfig = new MatDialogConfig();

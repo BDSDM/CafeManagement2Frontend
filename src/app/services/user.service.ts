@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 export interface User {
@@ -20,8 +20,23 @@ export class UserService {
   private apiUrl = 'http://localhost:8080/users'; // Remplace avec ton URL backend
   private apiUrlCookie = 'http://localhost:8080/users/api';
   private deleteColorUrl = 'http://localhost:8080/users/api/delete-color'; // Utilise le bon port pour le backend
+  private baseUrl = 'http://localhost:8080/api/auth';
 
   constructor(private http: HttpClient, private router: Router) {}
+
+  refreshAccessToken(): Observable<string> {
+    const refreshToken = localStorage.getItem('refreshToken');
+
+    if (!refreshToken) {
+      throw new Error('Aucun refresh token trouvé');
+    }
+
+    return this.http
+      .post<{ accessToken: string }>(this.baseUrl + '/refresh-token', {
+        token: refreshToken,
+      })
+      .pipe(map((response) => response.accessToken));
+  }
 
   updateUserStatus(email: string, status: string): Observable<string> {
     return this.http.put<string>(

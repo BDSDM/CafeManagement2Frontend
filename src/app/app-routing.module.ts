@@ -10,9 +10,13 @@ import { TodolistGuard } from './guards/todolist.guard';
 import { CookiesgameComponent } from './cookiesgame/cookiesgame.component';
 import { CookiesgameGuard } from './guards/cookiesgame.guard';
 import { AppComponent } from './app.component';
+import { ConfirmResetPasswordComponent } from './confirm-reset-password/confirm-reset-password.component';
+import { RequestResetPasswordComponent } from './request-reset-password/request-reset-password.component';
 
 const routes: Routes = [
   { path: '', component: AppComponent },
+  { path: 'reset-password/request', component: RequestResetPasswordComponent },
+  { path: 'reset-password', component: ConfirmResetPasswordComponent },
   {
     path: 'cookiesgame',
     component: CookiesgameComponent,
